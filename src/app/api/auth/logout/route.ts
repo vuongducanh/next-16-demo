@@ -1,5 +1,5 @@
 // app/api/auth/logout/route.ts
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { ApiResponse } from "@/utils/response.util";
 import { cookies } from "next/headers";
 

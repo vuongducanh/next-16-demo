@@ -1,5 +1,5 @@
 import { decryptToken } from "@/lib/auth/jwt";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { ApiResponse } from "@/utils/response.util";
 
 export async function GET(req: Request) {

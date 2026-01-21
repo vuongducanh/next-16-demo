@@ -46,3 +46,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 npm run dev -- -p 3001 --inspect=localhost:3002
 
 - Mở port 3001 và debug trên link localhost:3002
+
+- Vao xem db: https://console.neon.tech/app/projects/royal-tree-01035864?database=neondb

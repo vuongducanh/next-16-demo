@@ -1,6 +1,6 @@
 // app/api/auth/refresh/route.ts
 import { signAccessToken } from "@/lib/auth/jwt";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { ApiResponse } from "@/utils/response.util";
 import { cookies } from "next/headers";
 
