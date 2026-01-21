@@ -9,6 +9,8 @@ import { cookies } from "next/headers";
 export async function POST(req: Request) {
   const { email, password } = await req.json();
 
+  console.log("DB_HOST ==========", process.env.DATABASE_URL);
+
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
     return ApiResponse.notFound("User not found");
