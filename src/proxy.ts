@@ -12,13 +12,16 @@ export default async function proxy(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  // ✅ PUBLIC ROUTE → KHÔNG CẦN CHECK TOKEN
-  if (isPublicRoute) {
-    return NextResponse.next();
-  }
-
   // 3. Decrypt the session from the cookie
   const cookie = (await cookies()).get("refresh_token")?.value;
+
+  if (!cookie) {
+    if (isProtectedRoute) {
+      return NextResponse.redirect(new URL("/login", req.nextUrl));
+    }
+    return NextResponse.next(); // public + chưa login
+  }
+
   const refreshTokenDecrypt = await decryptToken(cookie);
 
   // 4. Redirect to /login if the user is not authenticated
