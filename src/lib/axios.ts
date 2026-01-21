@@ -91,7 +91,9 @@ axiosClient.interceptors.response.use(
       } catch (err) {
         processQueue(err, null);
         authStore.clear();
-        window.dispatchEvent(new Event("auth:logout"));
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("auth:logout"));
+        }
         return Promise.reject(err);
       } finally {
         isRefreshing = false;

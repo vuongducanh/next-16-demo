@@ -21,6 +21,7 @@ export async function POST() {
     tokenRecord.revoked ||
     tokenRecord.expiresAt < new Date()
   ) {
+    cookieStore.delete("refresh_token");
     return ApiResponse.unauthorized('Invalid refresh token');
 
   }

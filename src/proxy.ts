@@ -12,6 +12,11 @@ export default async function proxy(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
+  // ✅ PUBLIC ROUTE → KHÔNG CẦN CHECK TOKEN
+  if (isPublicRoute) {
+    return NextResponse.next();
+  }
+
   // 3. Decrypt the session from the cookie
   const cookie = (await cookies()).get("refresh_token")?.value;
   const refreshTokenDecrypt = await decryptToken(cookie);
@@ -35,5 +40,7 @@ export default async function proxy(req: NextRequest) {
 
 // Routes Proxy should not run on
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)", '/dashboard/:path*', '/'],
+  matcher: [
+    "/((?!api|_next/static|favicon.ico|\\.well-known|_next/image|.*\\.png$).*)",
+  ],
 };
