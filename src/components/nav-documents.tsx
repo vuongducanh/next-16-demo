@@ -42,7 +42,7 @@ export function NavDocuments({
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild suppressHydrationWarning={true}>
               <a href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
@@ -53,6 +53,7 @@ export function NavDocuments({
                 <SidebarMenuAction
                   showOnHover
                   className="data-[state=open]:bg-accent rounded-sm"
+                  suppressHydrationWarning={true}
                 >
                   <IconDots />
                   <span className="sr-only">More</span>
@@ -81,7 +82,7 @@ export function NavDocuments({
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
+          <SidebarMenuButton className="text-sidebar-foreground/70" suppressHydrationWarning={true}>
             <IconDots className="text-sidebar-foreground/70" />
             <span>More</span>
           </SidebarMenuButton>
