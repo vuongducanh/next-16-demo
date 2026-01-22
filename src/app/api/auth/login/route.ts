@@ -44,7 +44,7 @@ export async function POST(req: Request) {
   cookieStore.set("refresh_token", refreshToken, {
     httpOnly: true,
     secure: isProd,
-    sameSite: isProd ? "none" : "lax",
+    sameSite: "lax",
     expires: expiresAt,
     path: "/",
   });

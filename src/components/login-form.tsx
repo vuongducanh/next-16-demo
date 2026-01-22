@@ -16,6 +16,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 import { authService } from "@/services/auth.service";
 import { useForm } from "@tanstack/react-form";
@@ -68,13 +69,13 @@ export function LoginForm({
         await authService.login({ email, password });
         router.replace("/");
       } catch (e: any) {
-        const dataError = e.response?.data
+        const dataError = e.response?.data;
 
         toast("Login failed:", {
           description: (
             <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
               <code>{dataError.code}</code>
-              <br/>
+              <br />
               <code>{dataError.message}</code>
             </pre>
           ),
@@ -162,9 +163,20 @@ export function LoginForm({
                 }}
               />
               <Field>
-                <Button type="submit" form="login-form">
-                  Login
-                </Button>
+                <form.Subscribe selector={(state) => state.isSubmitting}>
+                  {(isSubmitting) => (
+                    <Button
+                      type="submit"
+                      form="login-form"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <Spinner data-icon="inline-start" />
+                      ) : null}
+                      Login
+                    </Button>
+                  )}
+                </form.Subscribe>
                 <Button variant="outline" type="button">
                   Login with Google
                 </Button>
