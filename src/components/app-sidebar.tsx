@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -18,11 +17,13 @@ import {
   IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
+import * as React from "react";
 
 import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -32,8 +33,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Spinner } from "@/components/ui/spinner";
 import { userService } from "@/services/user.service";
-import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 const data = {
@@ -154,9 +156,7 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [userInfo, setUserInfo] = React.useState<any>({})
-
-  const getProfile = async () => {
+  const fetchProfile = async () => {
     try {
       const rest = await userService.getProfile();
       return rest;
@@ -165,18 +165,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   };
 
-  React.useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const resProfile = await getProfile();
-        setUserInfo(resProfile)
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const {
+    data: userInfo,
+    error,
+    isLoading,
+    isError,
+    isFetching,
+    refetch: refetchProfile,
+  } = useQuery({
+    queryKey: ["profile"],
+    queryFn: fetchProfile,
+  });
 
-    fetchProfile();
-  }, []);
+  // React.useEffect(() => {
+  //   fetchProfile();
+  // }, []);
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -200,13 +203,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <Button onClick={getProfile}>Refresh me</Button>
+      <Button
+        onClick={() => refetchProfile()}
+        disabled={isLoading || isFetching}
+      >
+        {isLoading || isFetching ? <Spinner data-icon="inline-start" /> : null}
+        Refresh me
+      </Button>
       <SidebarFooter>
-        <NavUser user={{
-          name: userInfo?.fullName || '',
-          email: userInfo?.email || '',
-          avatar: ''
-        }} />
+        <NavUser
+          user={{
+            name: userInfo?.fullName || "",
+            email: userInfo?.email || "",
+            avatar: "",
+          }}
+        />
       </SidebarFooter>
     </Sidebar>
   );

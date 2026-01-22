@@ -16,6 +16,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { authService } from "@/services/auth.service";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
@@ -53,11 +54,15 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         const { fullName, email, password } = value;
         await authService.signup({ email, password, fullName });
         router.replace("/");
-      } catch (e) {
+      } catch (e: any) {
+        const dataError = e.response?.data;
+
         toast("Signup failed:", {
           description: (
             <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-              <code>{JSON.stringify(value, null, 2)}</code>
+              <code>{dataError.code}</code>
+              <br />
+              <code>{dataError.message}</code>
             </pre>
           ),
           position: "bottom-right",
@@ -166,9 +171,20 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             />
             <FieldGroup>
               <Field>
-                <Button type="submit" form="signup-form">
-                  Create Account
-                </Button>
+                <form.Subscribe selector={(state) => state.isSubmitting}>
+                  {(isSubmitting) => (
+                    <Button
+                      type="submit"
+                      form="signup-form"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <Spinner data-icon="inline-start" />
+                      ) : null}
+                      Create Account
+                    </Button>
+                  )}
+                </form.Subscribe>
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
