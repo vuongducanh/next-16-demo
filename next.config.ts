@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   reactStrictMode: false,
   experimental: {
-    browserDebugInfoInTerminal: true, // Only works in development mode
+    browserDebugInfoInTerminal: {
+      showSourceLocation: true,
+    },
   },
 };
 

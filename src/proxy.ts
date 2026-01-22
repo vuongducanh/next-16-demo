@@ -1,3 +1,5 @@
+// src/proxy.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { decryptToken } from "@/lib/auth/jwt";
 import { cookies } from "next/headers";

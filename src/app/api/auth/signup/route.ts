@@ -39,10 +39,12 @@ export async function POST(req: Request) {
 
   const cookieStore = await cookies();
 
+  const isProd = process.env.NODE_ENV === "production";
+
   cookieStore.set("refresh_token", refreshToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "strict",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     expires: expiresAt,
     path: "/",
   });
