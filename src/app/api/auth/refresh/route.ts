@@ -1,7 +1,7 @@
 // app/api/auth/refresh/route.ts
 import { signAccessToken } from "@/lib/auth/jwt";
 import prisma from "@/lib/prisma";
-import { ApiResponse } from "@/utils/response.util";
+import { ApiResponse } from "@/types/responses";
 import { cookies } from "next/headers";
 
 export async function POST() {

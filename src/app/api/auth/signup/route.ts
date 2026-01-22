@@ -1,8 +1,8 @@
 import { AUTH_EXPIRES } from "@/config/auth.config";
 import { signAccessToken, signRefreshToken } from "@/lib/auth/jwt";
 import prisma from "@/lib/prisma";
-import { getExpiresAt } from "@/utils/expire.util";
-import { ApiResponse } from "@/utils/response.util";
+import { getExpiresAt } from "@/lib/expire.util";
+import { ApiResponse } from "@/types/responses";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 

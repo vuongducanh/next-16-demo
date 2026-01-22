@@ -1,6 +1,6 @@
 // app/api/auth/logout/route.ts
 import prisma from "@/lib/prisma";
-import { ApiResponse } from "@/utils/response.util";
+import { ApiResponse } from "@/types/responses";
 import { cookies } from "next/headers";
 
 export async function POST() {
