@@ -1,9 +1,9 @@
-import { AUTH_EXPIRES } from "@/config/auth.config";
-import { ApiResponse } from "@/types/responses";
-import { AuthServerService } from "@/services/server/auth.service";
+import { AUTH_EXPIRES } from "@/client/config/auth.config";
+import { ApiResponse } from "@/shared/types/responses";
+import { AuthServerService } from "@/server/services/auth.service";
 import { cookies } from "next/headers";
-import { getExpiresAt } from "@/lib/expire.util";
-import { handleApiError } from "@/lib/error-handler";
+import { getExpiresAt } from "@/shared/lib/expire.util";
+import { handleApiError } from "@/shared/lib/error-handler";
 
 export async function POST(req: Request) {
   try {

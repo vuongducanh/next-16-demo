@@ -1,7 +1,7 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import AuthListener from "@/components/AuthListener";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/client/components/app-sidebar";
+import AuthListener from "@/client/components/AuthListener";
+import { SiteHeader } from "@/client/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/client/components/ui/sidebar";
 
 export default function ProtectedLayout({
   children,

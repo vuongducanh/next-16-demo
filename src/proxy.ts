@@ -1,7 +1,7 @@
 // src/proxy.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { decryptToken } from "@/lib/auth/jwt";
+import { decryptToken } from "@/server/lib/auth/jwt";
 import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes

@@ -1,6 +1,6 @@
 // app/api/cron/cleanup/route.ts
-import { cleanupRefreshTokens } from "@/jobs/cleanupRefreshTokens";
-import { ApiResponse } from "@/types/responses";
+import { cleanupRefreshTokens } from "@/server/jobs/cleanupRefreshTokens";
+import { ApiResponse } from "@/shared/types/responses";
 
 export async function GET(req: Request) {
   // TODO: Enable this check in production

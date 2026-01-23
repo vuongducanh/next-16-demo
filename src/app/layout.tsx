@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/client/components/theme-provider";
+import { Toaster } from "@/client/components/ui/sonner";
 import type { Metadata } from "next";
 import "./globals.css";
 import AppQueryClientProviders from "@/app/QueryClientProviders";
