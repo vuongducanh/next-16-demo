@@ -53,6 +53,10 @@ export class ApiResponse {
     return this.errorResponse(message, 404, "NOT_FOUND");
   }
 
+  static badRequest(message = "BAD_REQUEST") {
+    return this.errorResponse(message, 400, "BAD_REQUEST");
+  }
+
   static serverError(message = "Internal Server Error") {
     return this.errorResponse(message, 500, "INTERNAL_ERROR");
   }
