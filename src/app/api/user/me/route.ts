@@ -1,5 +1,5 @@
 import { getAuthenticatedUser } from "@/server/lib/auth/jwt";
-import { ApiResponse } from "@/shared/types/responses";
+import { ApiResponse } from "@/server/types/responses";
 
 export async function GET(req: Request) {
   try {

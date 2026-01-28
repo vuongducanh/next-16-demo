@@ -1,8 +1,8 @@
 // app/api/auth/logout/route.ts
-import { ApiResponse } from "@/shared/types/responses";
+import { ApiResponse } from "@/server/types/responses";
 import { AuthServerService } from "@/server/services/auth.service";
 import { cookies } from "next/headers";
-import { handleApiError } from "@/shared/lib/error-handler";
+import { handleApiError } from "@/server/lib/error-handler";
 
 export async function POST() {
   try {

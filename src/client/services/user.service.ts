@@ -1,5 +1,5 @@
 // services/user.service.ts
-import axiosClient from "@/shared/lib/axios";
+import axiosClient from "@/client/lib/axios";
 
 export const userService = {
   async getProfile() {

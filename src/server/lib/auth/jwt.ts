@@ -1,10 +1,10 @@
-import { AUTH_EXPIRES } from "@/client/config/auth.config";
+import prisma from "@/server/lib/prisma";
+import { ApiResponse } from "@/server/types/responses";
+import { ENV_CONFIG } from "@/shared/config/env.config";
 import { SignJWT, jwtVerify } from "jose";
 import "server-only";
-import prisma from "@/server/lib/prisma";
-import { ApiResponse } from "@/shared/types/responses";
 
-const secretKey = process.env.SESSION_SECRET;
+const secretKey = ENV_CONFIG.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function signAccessToken(payload: {
@@ -13,7 +13,7 @@ export async function signAccessToken(payload: {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime(AUTH_EXPIRES.ACCESS_TOKEN)
+    .setExpirationTime(ENV_CONFIG.AUTH.ACCESS_TOKEN_EXPIRES)
     .sign(encodedKey);
 }
 
@@ -23,7 +23,7 @@ export async function signRefreshToken(payload: {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime(AUTH_EXPIRES.REFRESH_TOKEN)
+    .setExpirationTime(ENV_CONFIG.AUTH.REFRESH_TOKEN_EXPIRES)
     .sign(encodedKey);
 }
 

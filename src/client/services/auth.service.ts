@@ -1,6 +1,6 @@
 // services/auth.service.ts
-import axiosClient from "@/shared/lib/axios";
-import { authStore } from "@/shared/lib/auth-store";
+import axiosClient from "@/client/lib/axios";
+import { authStore } from "@/client/lib/auth-store";
 
 export interface LoginPayload {
   email: string;

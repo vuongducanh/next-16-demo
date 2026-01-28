@@ -1,5 +1,6 @@
 // lib/prisma.ts
 
+import { ENV_CONFIG } from '@/shared/config/env.config'
 import { PrismaClient } from '../../../prisma/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 
@@ -8,7 +9,7 @@ const globalForPrisma = global as unknown as {
 }
 
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: ENV_CONFIG.DATABASE_URL,
 })
 
 const prisma = globalForPrisma.prisma || new PrismaClient({

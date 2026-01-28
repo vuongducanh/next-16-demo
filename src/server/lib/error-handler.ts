@@ -1,5 +1,5 @@
-import { ApiResponse } from "@/shared/types/responses";
-import { BadRequestError, NotFoundError, UnauthorizedError } from "@/shared/lib/errors";
+import { ApiResponse } from "@/server/types/responses";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "@/server/lib/errors";
 
 export function handleApiError(error: unknown): Response {
   if (error instanceof NotFoundError) {

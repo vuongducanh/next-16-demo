@@ -19,34 +19,11 @@ import { Input } from "@/client/components/ui/input";
 import { Spinner } from "@/client/components/ui/spinner";
 import { cn } from "@/client/lib/utils";
 import { authService } from "@/client/services/auth.service";
+import { LoginFormSchema } from "@/shared/types/auth.schema";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import * as z from "zod";
-
-const loginSchema = z.object({
-  email: z.email({
-    message: "Invalid email address", // Custom error message for invalid format
-  }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long", // Minimum length
-  }),
-  // .regex(/[A-Z]/, {
-  //   message: "Password must contain at least one uppercase letter", // Enforce uppercase
-  // })
-  // .regex(/[a-z]/, {
-  //   message: "Password must contain at least one lowercase letter", // Enforce lowercase
-  // })
-  // .regex(/[0-9]/, {
-  //   message: "Password must contain at least one number", // Enforce a number
-  // })
-  // .regex(/[@$!%*?&]/, {
-  //   message: "Password must contain at least one special character (@$!%*?&)", // Enforce a special character
-  // }),
-});
-
-type LoginSchema = z.infer<typeof loginSchema>;
 
 export function LoginForm({
   className,
@@ -60,8 +37,8 @@ export function LoginForm({
       password: "",
     },
     validators: {
-      onSubmit: loginSchema,
-      onChange: loginSchema,
+      onSubmit: LoginFormSchema,
+      onChange: LoginFormSchema,
     },
     onSubmit: async ({ value }) => {
       try {

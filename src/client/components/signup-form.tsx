@@ -18,23 +18,11 @@ import {
 import { Input } from "@/client/components/ui/input";
 import { Spinner } from "@/client/components/ui/spinner";
 import { authService } from "@/client/services/auth.service";
+import { SignupFormSchema } from "@/shared/types/auth.schema";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import * as z from "zod";
-
-const signUpSchema = z.object({
-  fullName: z.string().min(8, {
-    message: "FullName must be at least 8 characters long", // Minimum length
-  }),
-  email: z.email({
-    message: "Invalid email address", // Custom error message for invalid format
-  }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long", // Minimum length
-  }),
-});
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
@@ -46,8 +34,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       password: "",
     },
     validators: {
-      onSubmit: signUpSchema,
-      onChange: signUpSchema,
+      onSubmit: SignupFormSchema,
+      onChange: SignupFormSchema,
     },
     onSubmit: async ({ value }) => {
       try {

@@ -7,7 +7,7 @@ import {
   BadRequestError,
   UnauthorizedError,
   NotFoundError,
-} from "@/shared/lib/errors";
+} from "@/server/lib/errors";
 
 export interface SignupPayload {
   email: string;
